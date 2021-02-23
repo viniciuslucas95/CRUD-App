@@ -4,7 +4,7 @@ const UserModel = require('../models/User');
 
 const router = express.Router();
 
-router.post('/register', async function (req, res) {
+router.post('/register-user', async function (req, res) {
   if (req.body.username === '' || req.body.password === '') return;
 
   const newUser = new UserModel({

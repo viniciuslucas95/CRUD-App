@@ -4,9 +4,8 @@ const cors = require('cors');
 
 const app = express();
 
-const registerRouter = require('./routes/register');
-
-const UserModel = require('./models/User');
+const registerRouter = require('./routes/RegisterUser');
+const userListRouter = require('./routes/UsersList');
 
 app.use(express.json());
 app.use(cors());
@@ -20,6 +19,7 @@ mongoose.connect(
 );
 
 app.use(registerRouter);
+app.use(userListRouter);
 
 app.listen(3001, () => {
   console.log('Server running on port 3001...');

@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 
-import { RegisterStyle } from '../styles/Register';
+import { RegisterUserStyle } from '../styles/RegisterUser';
 
-export default function Register() {
+export default function RegisterUser() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  function RegisterUser() {
+  function Register() {
     if (username === '' || password === '') return;
 
-    Axios.post('http://localhost:3001/register', {
+    Axios.post('http://localhost:3001/register-user', {
       username: username,
       password: password,
     });
   }
 
   return (
-    <div>
+    <RegisterUserStyle>
+      <h2>Registrar Usuário</h2>
       <input
         type='text'
         name='username'
@@ -30,9 +31,9 @@ export default function Register() {
         placeholder='Password'
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type='submit' onClick={RegisterUser}>
-        Criar usuário
+      <button type='submit' onClick={Register}>
+        Registrar
       </button>
-    </div>
+    </RegisterUserStyle>
   );
 }

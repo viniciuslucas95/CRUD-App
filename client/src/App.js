@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Register from './components/Register';
+import RegisterUser from './components/RegisterUser';
+import UsersList from './components/UsersList';
 
 import GlobalStyle from './styles/Global';
 
@@ -8,7 +9,8 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Register />
+      <RegisterUser />
+      <UsersList />
     </>
   );
 }
