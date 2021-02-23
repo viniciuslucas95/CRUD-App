@@ -1,10 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
 const app = express();
+
+const registerRouter = require('./routes/register');
 
 const UserModel = require('./models/User');
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(
   'mongodb+srv://viniciuslucas:didimoco@mern-crud.sfsjt.mongodb.net/mern-crud?retryWrites=true&w=majority',
@@ -14,16 +19,7 @@ mongoose.connect(
   }
 );
 
-app.get('/', async (req, res) => {
-  const user = new UserModel({ username: 'test', password: '123' });
-
-  try {
-    await user.save();
-    res.send('inserted data');
-  } catch (err) {
-    console.log(err);
-  }
-});
+app.use(registerRouter);
 
 app.listen(3001, () => {
   console.log('Server running on port 3001...');

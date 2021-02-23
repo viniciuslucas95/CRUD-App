@@ -1,11 +1,14 @@
-import './App.css';
+import React from 'react';
 
-function App() {
+import Register from './components/Register';
+
+import GlobalStyle from './styles/Global';
+
+export default function App() {
   return (
-    <div className='App'>
-      <h1>MERN CRUD App</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <Register />
+    </>
   );
 }
-
-export default App;
