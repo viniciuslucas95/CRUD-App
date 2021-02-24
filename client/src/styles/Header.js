@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const HeaderStyle = styled.header`
   display: flex;
@@ -9,10 +9,26 @@ export const HeaderStyle = styled.header`
   padding: 0.5rem 2rem;
 
   h1 {
-    font-size: 1.9rem;
+    font-size: 2.2rem;
     letter-spacing: 0.5rem;
     text-transform: uppercase;
-    display: block;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 0.5rem 1rem;
+  }
+
+  @media screen and (max-width: 425px) {
+    h1 {
+      font-size: 2rem;
+      letter-spacing: 0.3rem;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    h1 {
+      font-size: 1.8rem;
+    }
   }
 `;
 
@@ -84,63 +100,81 @@ export const MenuIconStyle = styled.button`
   }
 `;
 
-const enableNavBar = keyframes`
-  from{
-    left: 200vw;
-  }to{
-    left: 80vw;
-  }
-`;
-
-const disableNavBar = keyframes`
-  from{
-    right: 0;
-  }to{
-    right: 100vw;
-  }
-`;
-
 export const NavBarStyle = styled.nav`
-  position: fixed;
-  padding: 1rem 2rem;
-  width: 50%;
-  height: calc(100vh - 3.5rem);
-  top: 3.5rem;
-  right: -100vw;
-  overflow: auto;
-  background-color: ${({ theme }) => theme.colors.headerBackground};
-  transition: transform 100ms ease-in;
-
-  ${({ toggle }) =>
-    toggle
-      ? css`
-          transform: translateX(-100vw);
-        `
-      : css`
-          transform: translateX(100vw);
-        `}
-
   ul {
-    width: fit-content;
-    margin: auto;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
     list-style: none;
+
+    a {
+      margin-right: 2rem;
+    }
+
+    a:last-child {
+      margin-right: 0rem;
+    }
   }
 
   li {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     letter-spacing: 0.2rem;
     font-weight: bold;
-    margin-top: 1rem;
   }
 
   a {
     text-decoration: none;
   }
 
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    padding: 1rem 2rem;
+    width: 40%;
+    height: calc(100vh - 3.5rem);
+    top: 3.5rem;
+    right: -100vw;
+    overflow: auto;
+    background-color: ${({ theme }) => theme.colors.headerBackground};
+    transition: transform 100ms ease-in;
+
+    ${({ toggle }) =>
+      toggle
+        ? css`
+            transform: translateX(-100vw);
+          `
+        : css`
+            transform: translateX(100vw);
+          `}
+
+    ul {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      a {
+        margin-top: 1rem;
+      }
+
+      a:nth-child(1) {
+        margin-top: 0;
+      }
+    }
+
+    li {
+      font-size: 1.4rem;
+    }
+  }
+
   @media screen and (max-width: 425px) {
-    width: 60%;
+    width: 50%;
+
     li {
       font-size: 1.2rem;
     }
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 60%;
   }
 `;
