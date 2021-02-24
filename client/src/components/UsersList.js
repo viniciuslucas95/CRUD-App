@@ -6,6 +6,8 @@ import { UsersListStyle } from '../styles/UsersList';
 export default function UsersList() {
   const [usersList, setUsersList] = useState([]);
 
+  document.title = 'Lista de Usuários';
+
   useEffect(UpdateList, []);
 
   function UpdateList() {

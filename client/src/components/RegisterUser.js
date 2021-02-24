@@ -3,9 +3,11 @@ import Axios from 'axios';
 
 import { RegisterUserStyle } from '../styles/RegisterUser';
 
-export default function RegisterUser() {
+export default function RegisterUser(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  document.title = 'Registrar Usuário';
 
   function Register() {
     if (username === '' || password === '') return;
@@ -18,7 +20,7 @@ export default function RegisterUser() {
 
   return (
     <RegisterUserStyle>
-      <h2>Registrar Usuário</h2>
+      <h3>Registrar Usuário</h3>
       <input
         type='text'
         name='username'
