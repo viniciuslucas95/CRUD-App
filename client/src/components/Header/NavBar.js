@@ -3,26 +3,34 @@ import { Link } from 'react-router-dom';
 
 import { NavBarStyle } from '../../styles/Header';
 
-export default function NavBar({ toggle, pathname }) {
+export default function NavBar({ setNavBar, toggle, pathname }) {
   let navItems = [];
 
   if (pathname !== '/')
     navItems.push(
-      <Link key={navItems.length} to='/'>
+      <Link onClick={() => setNavBar(false)} key={navItems.length} to='/'>
         <li>Página Principal</li>
       </Link>
     );
 
-  if (pathname !== '/register-users')
+  if (pathname !== '/register-user')
     navItems.push(
-      <Link key={navItems.length} to='/register-users'>
+      <Link
+        onClick={() => setNavBar(false)}
+        key={navItems.length}
+        to='/register-user'
+      >
         <li>Registrar Conta</li>
       </Link>
     );
 
   if (pathname !== '/users-list')
     navItems.push(
-      <Link key={navItems.length} to='/users-list'>
+      <Link
+        onClick={() => setNavBar(false)}
+        key={navItems.length}
+        to='/users-list'
+      >
         <li>Lista de Usuários</li>
       </Link>
     );

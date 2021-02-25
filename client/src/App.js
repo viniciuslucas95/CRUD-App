@@ -10,12 +10,14 @@ import GlobalStyle from './styles/Global';
 import Theme from './styles/Theme';
 
 export default function App() {
+  const mainStyle = { padding: '1rem 2rem' };
+
   return (
     <BrowserRouter>
       <Theme>
         <GlobalStyle />
         <Route path='/' component={Header} />
-        <main>
+        <main style={mainStyle}>
           <Switch>
             <Route path='/' exact component={HomePage} />
             <Route path='/register-user' component={RegisterUser} />

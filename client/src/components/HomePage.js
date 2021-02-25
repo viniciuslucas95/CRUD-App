@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { HomePageStyle } from '../styles/HomePage';
+
 export default function HomePage() {
   document.title = 'CRUD App';
 
-  return <h3>Página Inicial</h3>;
+  return <HomePageStyle>Página Inicial</HomePageStyle>;
 }

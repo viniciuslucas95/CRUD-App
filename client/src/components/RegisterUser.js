@@ -20,7 +20,7 @@ export default function RegisterUser(props) {
 
   return (
     <RegisterUserStyle>
-      <h3>Registrar Usuário</h3>
+      <h2>Registrar Usuário</h2>
       <input
         type='text'
         name='username'

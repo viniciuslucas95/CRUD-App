@@ -22,7 +22,11 @@ export default function Header({ location }) {
     <HeaderStyle>
       <h1>CRUD App</h1>
       <MenuIcon toggle={sideNav} onClick={() => setSideNav(!sideNav)} />
-      <NavBar toggle={sideNav} pathname={location.pathname} />
+      <NavBar
+        setNavBar={setSideNav}
+        toggle={sideNav}
+        pathname={location.pathname}
+      />
     </HeaderStyle>
   );
 }

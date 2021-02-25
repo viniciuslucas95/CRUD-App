@@ -1,21 +1,36 @@
 import styled from 'styled-components';
 
 export const RegisterUserStyle = styled.div`
-  display: block;
   margin: 1rem auto;
   width: fit-content;
+  padding: 0.5rem 1rem;
 
-  input,
-  button {
+  h2 {
+    width: fit-content;
+    margin: auto;
+  }
+
+  button,
+  input {
     display: block;
-    margin: 0 auto;
+    font-size: 1rem;
   }
 
   button {
     font-weight: bold;
+    margin: auto;
+    padding: 0.2rem 0.4rem;
   }
 
   input {
     margin: 1rem auto;
+    padding: 0.1rem 0.2rem;
+  }
+
+  @media screen and (max-width: 320px) {
+    button,
+    input {
+      font-size: 0.9rem;
+    }
   }
 `;
