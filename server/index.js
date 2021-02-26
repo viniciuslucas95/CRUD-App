@@ -2,13 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const app = express();
+const server = express();
 
-const registerRouter = require('./routes/RegisterUser');
-const userListRouter = require('./routes/UsersList');
+const userRouter = require('./routes/User');
 
-app.use(express.json());
-app.use(cors());
+server.use(express.json());
+server.use(cors());
 
 mongoose.connect(
   'mongodb+srv://viniciuslucas:didimoco@mern-crud.sfsjt.mongodb.net/mern-crud?retryWrites=true&w=majority',
@@ -18,9 +17,8 @@ mongoose.connect(
   }
 );
 
-app.use(registerRouter);
-app.use(userListRouter);
+server.use('/user', userRouter);
 
-app.listen(3001, () => {
+server.listen(3001, () => {
   console.log('Server running on port 3001...');
 });

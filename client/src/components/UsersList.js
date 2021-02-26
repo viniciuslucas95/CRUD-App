@@ -8,20 +8,15 @@ export default function UsersList() {
 
   document.title = 'Lista de Usuários';
 
-  useEffect(UpdateList, []);
-
-  function UpdateList() {
-    Axios.get('http://localhost:3001/users-list').then((response) => {
+  useEffect(function () {
+    Axios.get('http://localhost:3001/user/list').then((response) => {
       setUsersList(response.data);
     });
-  }
+  }, []);
 
   return (
     <UsersListStyle>
-      <div>
-        <h3>Lista de usuários</h3>
-        <button onClick={UpdateList}>Atualizar lista</button>
-      </div>
+      <h2>Lista de usuários</h2>
       {usersList.map((user, id) => (
         <li key={id}>
           <b>Usuário {id + 1}:</b> <i>{user.username}</i> <br /> <b>Senha: </b>
