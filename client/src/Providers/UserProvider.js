@@ -3,10 +3,10 @@ import React, { createContext, useState } from 'react';
 export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-  const [logged, setLogged] = useState(false);
+  const [token, setToken] = useState(null);
 
   return (
-    <UserContext.Provider value={{ logged, setLogged }}>
+    <UserContext.Provider value={{ token, setToken }}>
       {children}
     </UserContext.Provider>
   );

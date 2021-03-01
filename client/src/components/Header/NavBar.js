@@ -6,7 +6,7 @@ import { UserContext } from '../../Providers/UserProvider';
 import { NavBarStyle } from '../../styles/Header';
 
 export default function NavBar({ setNavBar, toggle, pathname }) {
-  const { logged, setLogged } = useContext(UserContext);
+  const { token, setToken } = useContext(UserContext);
 
   const navItems = [];
 
@@ -17,7 +17,7 @@ export default function NavBar({ setNavBar, toggle, pathname }) {
       </Link>
     );
 
-  if (!logged) {
+  if (token === null) {
     if (pathname !== '/login')
       navItems.push(
         <Link
@@ -54,7 +54,7 @@ export default function NavBar({ setNavBar, toggle, pathname }) {
     navItems.push(
       <Link
         onClick={() => {
-          setLogged(false);
+          setToken(null);
           setNavBar(false);
         }}
         key={navItems.length}

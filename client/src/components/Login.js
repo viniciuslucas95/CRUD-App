@@ -6,7 +6,7 @@ import { LoginStyle } from '../styles/Login.js';
 import ReplaceString from '../ReplaceString';
 
 export default function Login() {
-  const { setLogged } = useContext(UserContext);
+  const { setToken } = useContext(UserContext);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,8 +21,8 @@ export default function Login() {
         password: password,
       },
     })
-      .then(function () {
-        setLogged(true);
+      .then(function (res) {
+        setToken(res.data);
       })
       .catch(function (err) {
         setErrorText(err.response.data);

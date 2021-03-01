@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Axios from 'axios';
+
+import { UserContext } from '../Providers/UserProvider';
 
 import { UsersListStyle } from '../styles/UsersList';
 
 export default function UsersList() {
+  const { token } = useContext(UserContext);
+
   const [usersList, setUsersList] = useState([]);
 
   document.title = 'Lista de Usuários';
 
   useEffect(async function () {
     try {
-      const users = await Axios.get('http://localhost:3001/user/list');
+      const users = await Axios.request({
+        url: 'http://localhost:3001/user/list',
+        headers: { 'auth-token': token },
+      });
       setUsersList(users.data);
     } catch (err) {
       console.log(err.response.data);
     }
-    /*Axios.get('http://localhost:3001/user/list').then((res) => {
-      setUsersList(res.data);
-    });*/
   }, []);
 
   return (

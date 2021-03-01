@@ -12,7 +12,7 @@ import GlobalStyle from './styles/Global';
 import Theme from './styles/Theme';
 
 export default function App() {
-  const { logged } = useContext(UserContext);
+  const { token } = useContext(UserContext);
 
   return (
     <BrowserRouter>
@@ -22,24 +22,24 @@ export default function App() {
         <Switch>
           <Route path='/' exact component={HomePage} />
           <Route path='/register'>
-            {logged ? (
-              <Redirect to='/' />
-            ) : (
+            {token === null ? (
               <Route path='/register' component={Register} />
+            ) : (
+              <Redirect to='/' />
             )}
           </Route>
           <Route path='/user/list'>
-            {!logged ? (
-              <Redirect to='/' />
-            ) : (
+            {token !== null ? (
               <Route path='/user/list' component={UsersList} />
+            ) : (
+              <Redirect to='/' />
             )}
           </Route>
           <Route path='/login'>
-            {logged ? (
-              <Redirect to='/' />
-            ) : (
+            {token === null ? (
               <Route path='/login' component={Login} />
+            ) : (
+              <Redirect to='/' />
             )}
           </Route>
         </Switch>

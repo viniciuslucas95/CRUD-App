@@ -1,4 +1,7 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const VerifyToken = require('./VerifyToken');
 
 const UserModel = require('../models/User');
 const { ValidateUser } = require('../Validation');
@@ -13,12 +16,17 @@ router.get('/', async function (req, res) {
 
   if (error !== '') return res.status(400).send(error);
 
-  const userExists = await UserModel.findOne({ username: username });
+  const user = await UserModel.findOne({ username: username });
 
-  if (!userExists || password !== userExists.password)
+  if (!user) return res.status(400).send('Username or password is wrong.');
+
+  const validPassword = await bcrypt.compare(password, user.password);
+
+  if (!validPassword)
     return res.status(400).send('Username or password is wrong.');
 
-  res.status(200).send('Logged in.');
+  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+  res.send(token);
 });
 
 router.post('/', async function (req, res) {
@@ -37,19 +45,23 @@ router.post('/', async function (req, res) {
     return;
   }
 
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(password, salt);
+
   const newUser = new UserModel({
     username: username,
-    password: password,
+    password: hashedPassword,
   });
 
   try {
-    res.send(await newUser.save());
+    await newUser.save();
+    res.send(newUser._id);
   } catch (err) {
     res.status(400).send(err);
   }
 });
 
-router.get('/list', async function (req, res) {
+router.get('/list', VerifyToken, async function (req, res) {
   try {
     const users = await UserModel.find({});
 
@@ -57,7 +69,7 @@ router.get('/list', async function (req, res) {
       res.status(400).send('There is no user registered.');
     else res.send(users);
   } catch (err) {
-    res.status(400).end(err);
+    res.status(400).send(err);
   }
 });
 
