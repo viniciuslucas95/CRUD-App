@@ -4,10 +4,12 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     require: true,
+    minLength: 6,
   },
   password: {
     type: String,
     required: true,
+    minLength: 6,
   },
   creationDate: {
     type: Date,

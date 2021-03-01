@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-export const RegisterStyle = styled.div`
-  margin: 1rem auto;
-  width: fit-content;
-  padding: 0.5rem 1rem;
+export const RegisterStyle = styled.main`
+  padding: 1rem 2rem;
+
+  div {
+    margin: 1rem auto;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+  }
 
   h2 {
     width: fit-content;
@@ -25,6 +29,13 @@ export const RegisterStyle = styled.div`
   input {
     margin: 1rem auto;
     padding: 0.1rem 0.2rem;
+  }
+
+  p {
+    font-style: italic;
+    font-size: 1.1rem;
+    width: fit-content;
+    margin: 1rem auto 0 auto;
   }
 
   @media screen and (max-width: 320px) {

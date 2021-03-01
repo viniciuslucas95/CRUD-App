@@ -2,15 +2,15 @@ import React, { useContext, useState } from 'react';
 import Axios from 'axios';
 
 import { UserContext } from '../Providers/UserProvider';
-
 import { LoginStyle } from '../styles/Login.js';
+import ReplaceString from '../ReplaceString';
 
 export default function Login() {
   const { setLogged } = useContext(UserContext);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loginText, setLoginText] = useState('');
+  const [errorText, setErrorText] = useState('');
 
   document.title = 'Logar';
 
@@ -21,44 +21,37 @@ export default function Login() {
         password: password,
       },
     })
-      .then(function (res) {
-        if (res.data !== null) {
-          setLoginText('');
-          setLogged(true);
-        } else setLoginText('Usuário ou senha errado!');
+      .then(function () {
+        setLogged(true);
       })
       .catch(function (err) {
-        console.log(err);
+        setErrorText(err.response.data);
       });
-  }
-
-  function ReplaceString(string) {
-    const lowerCaseString = string.toLowerCase();
-    const replacedString = lowerCaseString.replace(/[^a-z0-9]/g, '');
-    return replacedString;
   }
 
   return (
     <LoginStyle>
-      <h2>Logar</h2>
-      <input
-        type='text'
-        name='username'
-        placeholder='Username'
-        value={username}
-        onChange={(e) => setUsername(ReplaceString(e.target.value))}
-      />
-      <input
-        type='password'
-        name='password'
-        placeholder='Password'
-        value={password}
-        onChange={(e) => setPassword(ReplaceString(e.target.value))}
-      />
-      <button type='submit' onClick={Logar}>
-        Logar
-      </button>
-      <p>{loginText}</p>
+      <div>
+        <h2>Logar</h2>
+        <input
+          type='text'
+          name='username'
+          placeholder='Username'
+          value={username}
+          onChange={(e) => setUsername(ReplaceString(e.target.value))}
+        />
+        <input
+          type='password'
+          name='password'
+          placeholder='Password'
+          value={password}
+          onChange={(e) => setPassword(ReplaceString(e.target.value))}
+        />
+        <button type='submit' onClick={Logar}>
+          Logar
+        </button>
+        <p>{errorText}</p>
+      </div>
     </LoginStyle>
   );
 }

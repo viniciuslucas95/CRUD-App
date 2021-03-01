@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-export const LoginStyle = styled.div`
-  margin: 1rem auto;
-  width: fit-content;
-  padding: 0.5rem 1rem;
+export const LoginStyle = styled.main`
+  padding: 1rem 2rem;
+
+  div {
+    margin: 1rem auto;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+  }
 
   h2 {
     width: fit-content;
