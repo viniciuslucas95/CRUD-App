@@ -61,13 +61,18 @@ router.post('/', async function (req, res) {
   }
 });
 
+router.delete('/', VerifyToken, async function (req, res) {
+  try {
+    await UserModel.deleteOne({ _id: req.body.id });
+    res.send('User deleted.');
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 router.get('/list', VerifyToken, async function (req, res) {
   try {
-    const users = await UserModel.find({});
-
-    if (users.length === 0)
-      res.status(400).send('There is no user registered.');
-    else res.send(users);
+    res.send(await UserModel.find({}));
   } catch (err) {
     res.status(400).send(err);
   }
