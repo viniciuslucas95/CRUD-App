@@ -70,6 +70,18 @@ router.delete('/', VerifyToken, async function (req, res) {
   }
 });
 
+router.patch('/', VerifyToken, async function (req, res) {
+  try {
+    await UserModel.updateOne(
+      { _id: req.body.id },
+      { $set: { username: 'Updated' } }
+    );
+    res.send('User updated.');
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 router.get('/list', VerifyToken, async function (req, res) {
   try {
     res.send(await UserModel.find({}));

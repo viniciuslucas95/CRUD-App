@@ -40,6 +40,20 @@ export default function UsersList() {
     }
   }
 
+  async function UpdateUser(id) {
+    try {
+      await Axios.patch(
+        'http://localhost:3001/user/',
+        { id: id },
+        { headers: { 'auth-token': token } }
+      );
+
+      UpdateList();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <UsersListStyle>
       <div>
@@ -53,7 +67,7 @@ export default function UsersList() {
             <i>{user.password}</i>
             <br />
             <div>
-              <button>Edit</button>
+              <button onClick={() => UpdateUser(user._id)}>Edit</button>
               <button onClick={() => DeleteUser(user._id)}>Delete</button>
             </div>
           </li>

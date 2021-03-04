@@ -12,19 +12,19 @@ export default function RegisterUser({ history }) {
 
   document.title = 'Registrar';
 
-  function Register() {
-    Axios.post('http://localhost:3001/user', {
-      username: username,
-      password: password,
-    })
-      .then(function () {
-        console.log('User created successfully.');
-
-        history.push('/');
-      })
-      .catch(function (err) {
-        setErrorText(err.response.data);
+  async function Register() {
+    try {
+      await Axios.post('http://localhost:3001/user', {
+        username: username,
+        password: password,
       });
+
+      console.log('User created successfully.');
+
+      history.push('/login');
+    } catch (err) {
+      setErrorText(err.response.data);
+    }
   }
 
   return (

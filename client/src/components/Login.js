@@ -14,19 +14,19 @@ export default function Login() {
 
   document.title = 'Logar';
 
-  function Logar() {
-    Axios.get('http://localhost:3001/user', {
-      params: {
-        username: username,
-        password: password,
-      },
-    })
-      .then(function (res) {
-        setToken(res.data);
-      })
-      .catch(function (err) {
-        setErrorText(err.response.data);
+  async function Logar() {
+    try {
+      const res = await Axios.get('http://localhost:3001/user', {
+        params: {
+          username: username,
+          password: password,
+        },
       });
+
+      setToken(res.data);
+    } catch (err) {
+      setErrorText(err.response.data);
+    }
   }
 
   return (
