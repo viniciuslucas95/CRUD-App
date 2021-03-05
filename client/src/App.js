@@ -6,6 +6,8 @@ import HomePage from './components/HomePage';
 import Register from './components/Register';
 import Login from './components/Login';
 import UsersList from './components/UsersList';
+import SideNavProvider from './Providers/SideNavProvider';
+import BlockScreen from './components/BlockScreen';
 import { UserContext } from './Providers/UserProvider';
 
 import GlobalStyle from './styles/Global';
@@ -18,25 +20,28 @@ export default function App() {
     <BrowserRouter>
       <Theme>
         <GlobalStyle />
-        <Route path='/' component={Header} />
+        <SideNavProvider>
+          <Route path='/' component={Header} />
+          <BlockScreen />
+        </SideNavProvider>
         <Switch>
           <Route path='/' exact component={HomePage} />
           <Route path='/register'>
-            {token === null ? (
+            {!token ? (
               <Route path='/register' component={Register} />
             ) : (
               <Redirect to='/' />
             )}
           </Route>
           <Route path='/user/list'>
-            {token !== null ? (
+            {token ? (
               <Route path='/user/list' component={UsersList} />
             ) : (
               <Redirect to='/' />
             )}
           </Route>
           <Route path='/login'>
-            {token === null ? (
+            {!token ? (
               <Route path='/login' component={Login} />
             ) : (
               <Redirect to='/' />

@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
 import MenuIcon from './MenuIcon';
 import NavBar from './NavBar';
 
 import { HeaderStyle } from '../../styles/Header';
+import { SideNavContext } from '../../Providers/SideNavProvider';
 
 export default function Header({ location }) {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [sideNav, setSideNav] = useState(false);
+  const { sideNav, setSideNav } = useContext(SideNavContext);
 
-  useEffect(() => {
-    function updateWidth() {
-      setWidth(window.innerWidth);
-      setSideNav(false);
-    }
+  function UpdateScreenSize() {
+    setSideNav(false);
+  }
 
-    window.addEventListener('resize', updateWidth);
-  });
+  window.addEventListener('resize', UpdateScreenSize);
 
   return (
     <HeaderStyle>

@@ -2,10 +2,12 @@ import styled, { css } from 'styled-components';
 
 export const HeaderStyle = styled.header`
   display: flex;
-  height: 3.5rem;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 2;
   background-color: ${({ theme }) => theme.colors.headerBackground};
+  height: 3.5rem;
   padding: 0.5rem 2rem;
 
   h1 {
